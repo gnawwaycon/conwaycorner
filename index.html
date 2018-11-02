@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when </p>
   <style>
   /* Set the size of the div element that contains the map */
   #map {
@@ -24,7 +23,7 @@
           position: pos,
           label: lab,
           map: map, //goes to the outer scope to retrieve map
-          url: "file:///Users/conway/Documents/coding/leetcode/corner.html#" + u
+          url: "https://gnawwaycon.github.io/conwaycorner#" + u
         });
         google.maps.event.addListener(marker[counter], 'click', function() {
           window.location.href = marker[counter].url; // set link to go to div for restaurant
