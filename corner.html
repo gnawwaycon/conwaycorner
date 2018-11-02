@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when </p>
+  <style>
+  /* Set the size of the div element that contains the map */
+  #map {
+    height: 400px;  /* The height is 400 pixels */
+    width: 100%;  /* The width is the width of the web page */
+  }
+</style>
+</head>
+<body>
+  <h3>Map of restaurants</h3>
+  <div id="map"></div>
+  <script>
+  function initMap(){
+    //initialize map at central point
+    var map = new google.maps.Map(
+      document.getElementById('map'), {zoom: 10, center: {lat: 33.999598, lng: -118.155891}});
+      var marker = []; //array of markers for each restaurant
+      function initMarker(pos, lab, u, counter){
+        marker[counter] = new google.maps.Marker({
+          position: pos,
+          label: lab,
+          map: map, //goes to the outer scope to retrieve map
+          url: "file:///Users/conway/Documents/coding/leetcode/corner.html#" + u
+        });
+        google.maps.event.addListener(marker[counter], 'click', function() {
+          window.location.href = marker[counter].url; // set link to go to div for restaurant
+        });
+      }
+      //initializing list of restaurants
+      initMarker({lat: 34.007601, lng: -118.241754}, "A", "foodbank", 1); //foodbank
+      initMarker({lat: 34.145373, lng: -118.031300}, "B", "innout", 2); //innout
+      initMarker({lat: 33.85800, lng: -118.303202}, "C", "greatsteak", 3); //great steak
+      initMarker({lat: 34.097735, lng:-118.108924}, "D", "ftb", 4);//factory tea bar
+      initMarker({lat: 34.102109, lng:-118.112695}, "E", "yama", 5);//yama seafood
+      // dimsum
+      initMarker({lat: 34.062965, lng:-118.109082}, "F1", "monterey", 6);//monterey palace
+      initMarker({lat: 34.079809, lng:-118.073484}, "F2", "sea", 7);//sea harbour
+      initMarker({lat: 34.092284, lng:-118.132169}, "F3", "lunasia", 8);//lunasia
+      initMarker({lat: 34.078766, lng:-118.103205}, "F4", "shanghai", 9);//shanghai no 1
+      //sundubu
+      initMarker({lat: 34.080508, lng:-118.093262}, "G1", "rirang", 10);//a ri rang
+      initMarker({lat: 34.104011, lng:-118.087645}, "G2", "yong", 11);//yong dong
+      initMarker({lat: 34.053094, lng:-118.292539}, "G3", "beverly", 12);//beverly sonon
+      //pho
+      initMarker({lat: 34.062927, lng:-118.063511}, "H1", "filet", 13);//pho filet
+      initMarker({lat: 34.064742, lng:-118.122361}, "H2", "crawfish", 14);//pho crawfish
+      initMarker({lat: 34.102854, lng:-118.111756}, "H3", "golden", 15);//pho golden deli
+      initMarker({lat: 34.108820, lng:-118.017967}, "H4", "lao", 16);//arcadia noodles
+      //the basic
+      initMarker({lat: 34.040157, lng:-118.442470}, "I", "tsujita", 17);//tsujita and tsujita annex
+      initMarker({lat: 34.041428, lng:-118.232907}, "J", "bavel", 18);//bavel
+      initMarker({lat: 34.127241, lng:-118.054280}, "K", "din", 19);//din
+      // AYCE
+      initMarker({lat: 34.108020, lng:-117.826522}, "L1", "show", 20);//sushi
+      initMarker({lat: 34.097831, lng:-118.073811}, "L2", "ook", 21);//ook kook
+      initMarker({lat: 34.068802, lng:-118.305196}, "L3", "yerim", 22);  //yerim
+      initMarker({lat: 34.063841, lng:-118.306149}, "L4", "hjc", 23);  //hjc
+      initMarker({lat: 34.062747, lng:-118.134556}, "L5", "shin", 24);//shin sen gumii
+      initMarker({lat: 34.124194, lng:-118.058224}, "L6", "mokkoji", 25);//mokkoji
+      initMarker({lat: 34.146474, lng:-118.073948}, "L7", "mongolian", 26); //golden palace
+      // desert
+      initMarker({lat: 34.128994, lng:-117.849770}, "M", "donut", 27);//donut man
+      initMarker({lat: 34.053661, lng:-118.035842}, "N", "candy", 28);//candy apples
+      //ice creams/froyos
+      ////how dare you put both next to eachother on a slash!
+      initMarker({lat: 34.145962, lng:-118.152370}, "O", "21", 29);//21 choices
+      initMarker({lat: 34.075812, lng:-118.323400}, "P", "salt", 30);//salt and straw
+      initMarker({lat: 34.073773, lng:-118.323947}, "Q", "jenis", 31);//jenis splendid ice cream
+    }
+  </script>
+  <script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7o-94o9S4tfP4vJVtltJQbnrC_F8swp0&callback=initMap">
+  </script>
+  <div id= "foodbank">
+    <h3><a href="https://www.yelp.com/biz/los-angeles-regional-food-bank-los-angeles" target="_blank">A. Los Angeles Regional Food Bank</a></h3>
+    <h6><a href="https://goo.gl/maps/TBfyNqiEhH62" target="_blank">1734 E 41st St, Los Angeles, CA 90058</a></h6>
+    This food related establishment might not be a restaurant per se(definitely not a 3 michillen star one) but if you only visit one place on Conways Corner this is the place. After workimg up an apetite you can visit any other place on the list and have a guilt free meal knowing you did something positive!
+    <a href= "" target= "_blank">Visit here</a>to sign up
+    Parking: Enter from the 41st st entrance not the 41st pl entrance indicated by google maps
+    Recommendations: If you want a lifting workout carry the sorted boxes to the weighing station
+    How I found this place: I was looking for a place where I could volunteer with some high school friends to catch up
+  </div>
+  <div id= "innout">
+    <h3><a href="https://www.yelp.com/biz/in-n-out-burger-arcadia" target="_blank">B. In-N-Out Burger</a></h3>
+    <h6><a href="https://goo.gl/maps/mfjmnXjbCdp" target="_blank">420 N Santa Anita Ave, Arcadia, CA 91006</a></h6>
+  </div>
+  <div id="greatsteak">
+    <h3><a href="https://www.yelp.com/biz/great-steak-torrance" target="_blank">C. Great Steak</a></h3>
+    <h6><a href="https://goo.gl/maps/Hh6jDU7B9o12" target="_blank">1400 W 190th St Ste A, Torrance, CA 90501</a></h6>
+  </div>
+  <div id="ftb">
+    <h3><a href="https://www.yelp.com/biz/factory-tea-bar-san-gabriel" target="_blank">D. Factory Tea Bar</a></h3>
+    <h6><a href="https://goo.gl/maps/vtuzyotpVdK2" target="_blank">323 S Mission Dr, San Gabriel, CA 91776</a></h6>
+  </div>
+  <div id="yama">
+    <h3><a href="https://www.yelp.com/biz/yama-seafood-san-gabriel-4" target="_blank">E. Yama Seafood</a></h3>
+    <h6><a href="https://goo.gl/maps/beUNBvUuWGQ2" target="_blank">911 W Las Tunas Dr, San Gabriel, CA 91775</a></h6>
+  </div>
+  <div id="monterey">
+    <h3><a href="https://www.yelp.com/biz/monterey-palace-restaurant-monterey-park" target="_blank">F1. Monterey Palace</a></h3>
+    <h6><a href="https://goo.gl/maps/1pW8Qcs6m5E2" target="_blank">1001 Garvey Ave, Monterey Park, CA 91755</a></h6>
+  </div>
+  <div id="sea">
+    <h3><a href="https://www.yelp.com/biz/sea-harbour-rosemead" target="_blank">F2. Sea Harbour</a></h3>
+    <h6><a href="https://goo.gl/maps/jQtzX6ueavx" target="_blank">3939 Rosemead Blvd, Rosemead, CA 91770</a></h6>
+  </div>
+  <div id="lunasia">
+    <h3><a href="https://www.yelp.com/biz/lunasia-chinese-cuisine-alhambra-3" target="_blank">F3. Lunasia Chinese Cuisine</a></h3>
+    <h6><a href="https://goo.gl/maps/FHtb1gqySsz" target="_blank">500 W Main St, Alhambra, CA 91801</a></h6>
+  </div>
+  <div id="shanghai">
+    <h3><a href="https://www.yelp.com/biz/shanghai-no-1-seafood-san-gabriel-2" target="_blank">F4. Shanghai No. 1 Seafood</a></h3>
+    <h6><a href="https://goo.gl/maps/mwRb87paNLv" target="_blank">927 E Las Tunas Dr, San Gabriel, CA 91776</a></h6>
+  </div>
+  <div id="rirang">
+    <h3><a href="https://www.yelp.com/biz/a-ri-rang-tofu-house-san-gabriel" target="_blank">G1. A Ri Rang Tofu House</a></h3>
+    <h6><a href="https://goo.gl/maps/yvaaPZkRKpC2" target="_blank">529 E Valley Blvd #128, San Gabriel, CA 91776</a></h6>
+  </div>
+  <div id="yong">
+    <h3><a href="https://www.yelp.com/biz/young-dong-tofu-house-san-gabriel-2" target="_blank">G2. Young Dong Tofu House</a></h3>
+    <h6><a href="https://goo.gl/maps/5ymcizg7Z2D2" target="_blank">927 E Las Tunas Dr, San Gabriel, CA 91776</a></h6>
+  </div>
+  <div id="beverly">
+    <h3><a href="https://www.yelp.com/biz/beverly-soon-tofu-restaurant-los-angeles" target="_blank">G3. Beverly Soon Tofu Restaurant</a></h3>
+    <h6><a href="https://goo.gl/maps/pWa4w9Fp3gp" target="_blank">2717 W Olympic Blvd, Los Angeles, CA 90006</a></h6>
+  </div>
+  <div id="filet">
+    <h3><a href="https://www.yelp.com/biz/pho-filet-south-el-monte" target="_blank">H1. Pho Filet</a></h3>
+    <h6><a href="https://goo.gl/maps/eGwzpnD97u32" target="_blank">9463 Garvey Ave ste a, South El Monte, CA 91733</a></h6>
+  </div>
+  <div id="crawfish">
+    <h3><a href="https://www.yelp.com/biz/king-red-crawfish-and-pho-monterey-park-3" target="_blank">H2. King Red Crawfish & Pho</a></h3>
+    <h6><a href="https://goo.gl/maps/KxViXsNEo232" target="_blank">230 N Garfield Ave, Monterey Park, CA 91754</a></h6>
+  </div>
+  <div id="golden">
+    <h3><a href="https://www.yelp.com/biz/golden-deli-san-gabriel" target="_blank">H3. Golden Deli</a></h3>
+    <h6><a href="https://goo.gl/maps/LvyzFesxtkQ2" target="_blank">815 W Las Tunas Dr, San Gabriel, CA 91776</a></h6>
+  </div>
+  <div id="lao">
+    <h3><a href="https://www.yelp.com/biz/laoxi-noodle-house-arcadia" target="_blank">H4. LaoXi Noodle House</a></h3>
+    <h6><a href="https://goo.gl/maps/9KYpv4ezCR92" target="_blank">600 Live Oak Ave, Arcadia, CA 91006</a></h6>
+  </div>
+  <div id="tsujita">
+    <h3><a href="https://www.yelp.com/biz/tsujita-la-artisan-noodle-los-angeles-2" target="_blank">I. Tsujita LA Artisan Noodle</a></h3>
+    <h6><a href="https://goo.gl/maps/KiWeCKrwav52" target="_blank">2050 Sawtelle Blvd, Los Angeles, CA 90025</a></h6>
+  </div>
+  <div id="bavel">
+    <h3><a href="https://www.yelp.com/biz/bavel-los-angeles-3" target="_blank">J. Bavel</a></h3>
+    <h6><a href="https://goo.gl/maps/sgSkjKotfYD2" target="_blank">500 Mateo St, Los Angeles, CA 90013</a></h6>
+  </div>
+  <div id="din">
+    <h3><a href="https://www.yelp.com/biz/din-tai-fung-arcadia-5" target="_blank">K. Din Tai Fung</a></h3>
+    <h6><a href="https://goo.gl/maps/kLx2PpF91ix" target="_blank">1108 S Baldwin Ave, Arcadia, CA 91007</a></h6>
+  </div>
+  <div id="show">
+    <h3><a href="https://www.yelp.com/biz/show-sushi-san-dimas" target="_blank">L1. Show Sushi</a></h3>
+    <h6><a href="https://goo.gl/maps/gGoAsUZsRxQ2" target="_blank">957 Arrow Hwy, San Dimas, CA 91773</a></h6>
+  </div>
+  <div id="ook">
+    <h3><a href="https://www.yelp.com/biz/oo-kook-korean-bbq-san-gabriel" target="_blank">L2. OO-KOOK Korean BBQ</a></h3>
+    <h6><a href="https://goo.gl/maps/Z1osgpMUSFo" target="_blank">5405 Rosemead Blvd, San Gabriel, CA 91776</a></h6>
+  </div>
+  <div id="yerim">
+    <h3><a href="https://www.yelp.com/biz/yerim-korean-bbq-los-angeles-2" target="_blank">L3. Yerim Korean BBQ</a></h3>
+    <h6><a href="https://goo.gl/maps/D5tLoWkAL1T2" target="_blank">300 S Hobart Blvd, Los Angeles, CA 90020</a></h6>
+  </div>
+  <div id="hjc">
+    <h3><a href="https://www.yelp.com/biz/hae-jang-chon-korean-bbq-restaurant-los-angeles" target="_blank">L4. Hae Jang Chon</a></h3>
+    <h6><a href="https://goo.gl/maps/cGnM31fEkKP2" target="_blank">3821 W 6th St, Los Angeles, CA 90020</a></h6>
+  </div>
+  <div id="shin">
+    <h3><a href="https://www.yelp.com/biz/shin-sen-gumi-yakitori-and-shabu-shabu-monterey-park-monterey-park" target="_blank">L5. Shin-Sen-Gumi Yakitori & Shabu-Shabu</a></h3>
+    <h6><a href="https://goo.gl/maps/8CQgj1Za6KU2" target="_blank">111 N Atlantic Blvd #248, Monterey Park, CA 91754</a></h6>
+  </div>
+  <div id="mokkoji">
+    <h3><a href="https://www.yelp.com/biz/mokkoji-arcadia-2" target="_blank">L6. Mokkoji</a></h3>
+    <h6><a href="https://goo.gl/maps/y7CgHrFDeQE2" target="_blank">815 W Naomi Ave, Arcadia, CA 91007</a></h6>
+  </div>
+  <div id="mongolian">
+    <h3><a href="https://www.yelp.com/biz/golden-palace-mongolian-bbq-pasadena" target="_blank">L7. Golden Palace Mongolian BBQ</a></h3>
+    <h6><a href="https://goo.gl/maps/6qaVSPNxK182" target="_blank">3681 E Colorado Blvd, Pasadena, CA 91107</a></h6>
+  </div>
+  <div id="donut">
+    <h3><a href="https://www.yelp.com/biz/the-donut-man-glendora" target="_blank">M. The Donut Man</a></h3>
+    <h6><a href="https://goo.gl/maps/zuiqmyao9my" target="_blank">915 E Rte 66, Glendora, CA 91740</a></h6>
+  </div>
+  <div id="candy">
+    <h3><a href="https://www.yelp.com/biz/california-snack-foods-south-el-monte" target="_blank">N. California Snack Foods</a></h3>
+    <h6><a href="https://goo.gl/maps/Jth3ZUCUBMN2" target="_blank">2131 Tyler Ave, South El Monte, CA 91733</a></h6>
+  </div>
+  <div id="21">
+    <h3><a href="https://www.yelp.com/biz/21-choices-frozen-yogurt-pasadena" target="_blank">O. 21 Choices Frozen Yogurt</a></h3>
+    <h6><a href="https://goo.gl/maps/3mFER8STNYH2" target="_blank">85 W Colorado Blvd, Pasadena, CA 91105</a></h6>
+  <p>https://goo.gl/maps/kVGn5ZuMMdt</p>
+  </div>
+  <div id="salt">
+    <h3><a href="https://www.yelp.com/biz/salt-and-straw-los-angeles" target="_blank">P. Salt & Straw</a></h3>
+    <h6><a href="https://goo.gl/maps/kf5gyXqB9PP2" target="_blank">240 N Larchmont Blvd, Los Angeles, CA 90004</a></h6>
+  </div>
+  <div id="jenis">
+    <h3><a href="https://www.yelp.com/biz/jenis-splendid-ice-creams-los-angeles-3" target="_blank">Q. Jeni’s Splendid Ice Creams</a></h3>
+    <h6><a href="https://goo.gl/maps/VNsZ3MdhmTp" target="_blank">123 N Larchmont Blvd, Los Angeles, CA 90004</a></h6>
+  </div>
+</body>
+</html>
