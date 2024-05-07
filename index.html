@@ -1,41 +1,89 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LA Food Guide</title>
-  <link rel="stylesheet" href="styles.css">
-
+  <style>
+  /* Set the size of the div element that contains the map */
+  #map {
+    height: 400px;  /* The height is 400 pixels */
+    width: 100%;  /* The width is the width of the web page */
+  }
+  #foodpic {
+      /* The height is 400 pixels */
+    width: 100%;  /* The width is the width of the web page */
+  }
+</style>
 </head>
 <body>
-  <header>
-    <nav>
-      <ul>
-        <li><a href="#intro">Introduction</a></li>
-        <li><a href="#mapsection">Map</a></li>
-        <li><a href="#dimsum">Dimsum 点心</a></li>
-        <li><a href="#sundubu">Sundubu</a></li>
-        <li><a href="#phofish">"Viet food"</a></li>
-        <li><a href="#hype">Worth the Hype?</a></li>
-        <li><a href="#ayce">AYCE</a></li>
-        <li><a href="#dessert">Dessert</a></li>      
-      </ul>
-    </nav>
-  </header>
-
-  <main>
-    <section id="intro">
-      <h1>LA Food Guide</h1>
-      <p>I havent lived in la in 7 years but as a frequent visitor these are/were my frequents. Some have closed since I first started this project in 2018 but this isn't exactly a food guide or anything like that, more of a food Journal.</p>
-    </section>
-
-    <section id="mapsection">
-      <h2>Map of Restaurants</h2>
-      <div id="mapContainer">
-        <div id="map"></div>
-      </div>
-    </section>
-<section id= "foodbank">
+  <p>I havent lived in la in 7 years but as a frequent visitor these are/were my frequents. Some have closed since I first started this project in 2018 but this isn't exactly a food guide or anything like that, more of a food Journal.</p>
+  <h3>Map of restaurants</h3>
+  <div id="map"></div>
+  <script>
+  function initMap(){
+    //initialize map at central point
+    var map = new google.maps.Map(
+      document.getElementById('map'), {zoom: 10, center: {lat: 33.999598, lng: -118.155891}});
+      var marker = []; //array of markers for each restaurant
+      function initMarker(pos, lab, u, counter){
+        marker[counter] = new google.maps.Marker({
+          position: pos,
+          label: lab,
+          map: map, //goes to the outer scope to retrieve map
+          url: "https://gnawwaycon.github.io/conwaycorner#" + u
+          //deployed: https://gnawwaycon.github.io/conwaycorner#" + u
+          //local: "file:///Users/conwaywang/Desktop/conwaycorner/index.html#" + u
+        });
+        google.maps.event.addListener(marker[counter], 'click', function() {
+          window.location.href = marker[counter].url; // set link to go to div for restaurant
+        });
+      }
+      //initializing list of restaurants
+      initMarker({lat: 34.007601, lng: -118.241754}, "A", "foodbank", 1); //foodbank
+      initMarker({lat: 34.145373, lng: -118.031300}, "B", "innout", 2); //innout
+      initMarker({lat: 33.85800, lng: -118.303202}, "C", "greatsteak", 3); //great steak
+      initMarker({lat: 34.097735, lng:-118.108924}, "D", "ftb", 4);//factory tea bar
+      initMarker({lat: 34.102109, lng:-118.112695}, "E", "yama", 5);//yama seafood
+      // dimsum
+      initMarker({lat: 34.062965, lng:-118.109082}, "F1", "monterey", 6);//monterey palace
+      initMarker({lat: 34.079809, lng:-118.073484}, "F2", "sea", 7);//sea harbour
+      initMarker({lat: 34.092284, lng:-118.132169}, "F3", "lunasia", 8);//lunasia
+      initMarker({lat: 34.078766, lng:-118.103205}, "F4", "shanghai", 9);//shanghai no 1
+      //sundubu
+      initMarker({lat: 34.080508, lng:-118.093262}, "G1", "rirang", 10);//a ri rang
+      initMarker({lat: 34.104011, lng:-118.087645}, "G2", "yong", 11);//yong dong
+      initMarker({lat: 34.053094, lng:-118.292539}, "G3", "beverly", 12);//beverly sonon
+      //pho
+      initMarker({lat: 34.062927, lng:-118.063511}, "H1", "filet", 13);//pho filet
+      initMarker({lat: 34.094541, lng:-118.128706}, "H2", "crawfish", 14);//pho crawfish
+      initMarker({lat: 34.102854, lng:-118.111756}, "H3", "golden", 15);//pho golden deli
+      initMarker({lat: 34.108820, lng:-118.017967}, "H4", "lao", 16);//arcadia noodles
+      //the basic
+      initMarker({lat: 34.040157, lng:-118.442470}, "I", "tsujita", 17);//tsujita and tsujita annex
+      initMarker({lat: 34.041428, lng:-118.232907}, "J", "bavel", 18);//bavel
+      initMarker({lat: 34.127241, lng:-118.054280}, "K", "din", 19);//din
+      // AYCE
+      initMarker({lat: 34.108020, lng:-117.826522}, "L1", "show", 20);//sushi
+      initMarker({lat: 34.097831, lng:-118.073811}, "L2", "ook", 21);//ook kook
+      initMarker({lat: 34.068802, lng:-118.305196}, "L3", "yerim", 22);  //yerim
+      initMarker({lat: 34.063841, lng:-118.306149}, "L4", "hjc", 23);  //hjc
+      initMarker({lat: 34.062747, lng:-118.134556}, "L5", "shin", 24);//shin sen gumii
+      initMarker({lat: 34.124194, lng:-118.058224}, "L6", "mokkoji", 25);//mokkoji
+      initMarker({lat: 34.146474, lng:-118.073948}, "L7", "mongolian", 26); //golden palace
+      // desert
+      initMarker({lat: 34.128994, lng:-117.849770}, "M", "donut", 27);//donut man
+      initMarker({lat: 34.053661, lng:-118.035842}, "N", "candy", 28);//candy apples
+      initMarker({lat: 33.992315, lng:-118.422230}, "O", "angel", 29);//angel maid
+      //ice creams/froyos
+      ////how dare you put both next to eachother on a slash!
+      initMarker({lat: 34.145962, lng:-118.152370}, "P", "21", 30);//21 choices
+      initMarker({lat: 34.075812, lng:-118.323400}, "Q", "salt", 31);//salt and straw
+      initMarker({lat: 34.073773, lng:-118.323947}, "R", "jenis", 32);//jenis splendid ice cream
+      initMarker({lat: 33.879658, lng:-118.282933}, "S", "fresa", 33);//Fresa con crema
+    }
+  </script>
+  <script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7o-94o9S4tfP4vJVtltJQbnrC_F8swp0&callback=initMap">
+  </script>
+  <div id= "foodbank">
     <h3><a href="https://www.yelp.com/biz/los-angeles-regional-food-bank-los-angeles" target="_blank">A. Los Angeles Regional Food Bank</a></h3>
     <h6><a href="https://goo.gl/maps/TBfyNqiEhH62" target="_blank">1734 E 41st St, Los Angeles, CA 90058</a></h6>
     <p>  This food related establishment might not be a restaurant per se but if you only visit one place on Conway's Corner this is the place. After working up an appetite you can visit any other place on the list and have a guilt free meal knowing you did something positive!
@@ -48,23 +96,23 @@
       <br/>
       How I found this place: I was looking for a place where I could volunteer with some high school friends to catch up
   </p>
-  </section>
-  <section id= "innout">
+  </div>
+  <div id= "innout">
     <h3><a href="https://www.yelp.com/biz/in-n-out-burger-arcadia" target="_blank">B. In-N-Out Burger</a></h3>
     <h6><a href="https://goo.gl/maps/mfjmnXjbCdp" target="_blank">420 N Santa Anita Ave, Arcadia, CA 91006</a></h6>
     The most LA food is innout. Just like how bagels are new york, deep dish is chicago, bojangles is the south, or broccoli on pizza is SF, innout started right in LA's suburbs in Baldwin park and as a result you won't have any trouble finding one closeby. This one is the closest to my home so it's my go-to but any innout will do
 <br/>Parking: Every innout has a drive through(besides the unholy sf one) and anything ranging from a few tables outside to a fully indoor seating area.
 <br/>Recommendations: double double animal style whole grilled onion raw onion extra toasted, a well done fry, and a flying Dutchman mustard fried with chopped grilled onions, and spread and then I have a diy animal style fry with meat for only 2 dollars more than the regular animal style fry
-  </section>
-  <section id="greatsteak">
+  </div>
+  <div id="greatsteak">
     <h3><a href="https://www.yelp.com/biz/great-steak-torrance" target="_blank">C. Great Steak</a></h3>
     <h6><a href="https://goo.gl/maps/Hh6jDU7B9o12" target="_blank">1400 W 190th St Ste A, Torrance, CA 90501</a></h6>
     <p>A childhood staple of the Westfield Santa Anita mall that got replaced by the even more chainy franchise Charlie's cheesesteak. But the legend still lives on(in the greater Los Angeles area) tucked away in a random strip mall in Torrance. Any day and any time of the week you will find locals chowing down at this franchise run by Korean ajummas. Their name and branding might imply the cheesesteaks are what's up but in actuality their potatoes are basically baked potatoes squirted by their triple nozzle butter dispenser, and topped with what might normally go on a cheesesteak.
       <br/>Parking: Anywhere in the strip mall
       <br/>Recommendations: Get either the great potato(with steak or pastrami) or the King potato if you want that classic bacon cheddar sour cream baked potato
       </p>
-  </section>
-  <section id="ftb">
+  </div>
+  <div id="ftb">
     <h3><a href="https://www.yelp.com/biz/factory-tea-bar-san-gabriel" target="_blank">D. Factory Tea Bar</a></h3>
     <h6><a href="https://goo.gl/maps/vtuzyotpVdK2" target="_blank">323 S Mission Dr, San Gabriel, CA 91776</a></h6>
     <p>LA has the best boba in America(this is a fact). I have no idea what the kids these days are drinking but I was a huge fan of ftb from 2012-2019. Factory tea bar serves their boba balls warm and that first sip is absolute perfection. The texture is perfect, offering just the right amount of resistance when you bite down, offering a light snack of chewy delightfulness at the end of each sip.
@@ -72,16 +120,16 @@
       <br/>Recommendations: The nom nom milk is a classic(come on tuesday for their happy hour special). Their nom nom green tea is also delicious. If you are in the mood for something overly sweet I used to get the caramel milk smoothie. Don't forget to add boba to your order! 
       <br/>Honorable mention: half and half: has more locations but I'm too loyal to ftb to go anywhere else while I'm home
       </p>
-  </section>
-  <section id="yama">
+  </div>
+  <div id="yama">
     <h3><a href="https://www.yelp.com/biz/yama-seafood-san-gabriel-4" target="_blank">E. Yama Seafood</a></h3>
     <h6><a href="https://goo.gl/maps/beUNBvUuWGQ2" target="_blank">911 W Las Tunas Dr, San Gabriel, CA 91775</a></h6>
     <p>A hole in the wall, cut to order sashimi, run by an awesome old japanese man named Yama. Yama bends over the counter butchering and portioning the fish to put on display. There are separate fridges by the register with sushi rolls and such ready for consumption.
       <br/>Parking: the entrance is right next to the Jack in the box drive through and has plenty of space in the lot behind the store
       <br/>Recommendations:get a fatty piece of bluefin tuna and then rolls to fill up on
       </p>
-  </section>
-  <section id="dimsum">
+  </div>
+  <div>
     <h2>dimsum</h2>
     <p>next up in places I literally can't find a replacement for outside of LA(besides China and possibly Vancouver) is dimsum. For those of you that don't know, dimsum is basically Chinese brunch tapas. Its original name is yum cha which means drink tea. It all started in Guangzhou wehn tea houses began preparing small dishes to go along with the tea and became what we know today as dimsum. All these restaurants don't do carts and instead have checklists which you order off of and servers bring the dishes streaming hot straight from the kitchen to preserve freshness.
       <br/>
@@ -90,8 +138,8 @@
       <br/>
       These restaurants also do dinner well but come before the afternoon because most places switch to dinner after around 3.
       </p>
-  </section>
-  <section id="monterey">
+  </div>
+  <div id="monterey">
     <h3><a href="https://www.yelp.com/biz/monterey-palace-restaurant-monterey-park" target="_blank">F1. Monterey Palace</a></h3>
     <h6><a href="https://goo.gl/maps/1pW8Qcs6m5E2" target="_blank">1001 Garvey Ave, Monterey Park, CA 91755</a></h6>
     <p>the most authentic and this is the place my family goes to with friends who visit from china. This also means it's the cheapest but it also means it's the busiest, least foreign friendly, and has the most rude staff and customers hence the 3 star rating in Yelp and standard white people reviews giving it a 5 stars for food and 1 star for service.
@@ -100,8 +148,8 @@
       <img id="foodpic" src="https://lh3.googleusercontent.com/pw/AL9nZEWe7yQPnsZv9pxxyQdQK2lejQ5rfP0QWo3vqy35nW2rHI334Sn9CD_ejmcScsVhdUaOj-9iNZ72f1X1OIjMJ0wdGjC_zo820YkPwOTqBZ5_YSsfgrAwWSgomRfhz1GYmQh7GFL5ZcH4pbXEsOgh3bw2aA=w1457-h1940-no?authuser=0"  alt="Monterey Palace food picture" />
       <figcaption>The little fried crescent shaped dumplings are super underrated. Fried Glutinous Rice Dumplings 鹹水角 </figcaption>
     </figure>
-  </section>
-  <section id="sea">
+  </div>
+  <div id="sea">
     <h3><a href="https://www.yelp.com/biz/sea-harbour-rosemead" target="_blank">F2. Sea Harbour</a></h3>
     <h6><a href="https://goo.gl/maps/jQtzX6ueavx" target="_blank">3939 Rosemead Blvd, Rosemead, CA 91770</a></h6>
     <p>This place has its walls plastered with Chinese celebrities dining at the restaurant and you certainly get celebrity prices eating here. A lot of modern dimsum takes elements from western cooking and the origin of a char siu bao is actually thanks to baking powder. It does things like truffle topped siu mai instead of the traditional shrimp topping. Because of the reputation and use of ingredients like truffle this is the priciest dimsum coming in around 30 per person
@@ -110,37 +158,37 @@
       <img id="foodpic" src="https://lh3.googleusercontent.com/pw/AL9nZEUiKDQZj5F_AWr0kaDzdZOK9M8TlFLyarlR9jKe8qKCA69OiboSmZBR_9VbcFGWyeZj4K_r4hYfFUHLbMivm1P9hFln9YtpRDJS8uuabNUukSjarxZXX1G8uA5bJ51tBtotdlfSL0LPiXMcMuTfZYrj1A=w1457-h1940-no?authuser=0"  alt="Sea Harbour food picture" />
       <figcaption>Underrated egg white choi sum dried scallop fried rice</figcaption>
     </figure>
-  </section>
-  <section id="lunasia">
+  </div>
+  <div id="lunasia">
     <h3><a href="https://www.yelp.com/biz/lunasia-chinese-cuisine-alhambra-3" target="_blank">F3. Lunasia Chinese Cuisine</a></h3>
     <h6><a href="https://goo.gl/maps/FHtb1gqySsz" target="_blank">500 W Main St, Alhambra, CA 91801</a></h6>
     <p>This is a very American friendly dimsum restaurant. There are two locations and has solid food and pricing,
     </p>
-  </section>
-  <section id="shanghai">
+  </div>
+  <div id="shanghai">
     <h3><a href="https://www.yelp.com/biz/shanghai-no-1-seafood-san-gabriel-2" target="_blank">F4. Shanghai No. 1 Seafood</a></h3>
     <h6><a href="https://goo.gl/maps/mwRb87paNLv" target="_blank">927 E Las Tunas Dr, San Gabriel, CA 91776</a></h6>
     <p>I've only been here once and we went because according to our mom one of the famous dimsum chefs started working here. It's a little cramped and has oddly extravagant decor here but the food is still great.
     </p>
-  </section>
-  <section id="sundubu">
+  </div>
+  <div>
     <h2>sundubu</h2>
       <p>This is korean tofu soup. There are chains like bcd but I find these places have better soups and have better value than the chains i see outside of LA. These are all Korean restaurants that serve other dishes as well. But I recommend getting a combination with sundubu and la galbi(fun fact: LA galbi can either refer to the way this short rib was cut as popularized in LA, or it could reference the way the bones are cut on the Lateral Axis.) 
       </p>
-  <section id="rirang">
+  <div id="rirang">
     <h3><a href="https://www.yelp.com/biz/a-ri-rang-tofu-house-san-gabriel" target="_blank">G1. A Ri Rang Tofu House</a></h3>
     <h6><a href="https://goo.gl/maps/yvaaPZkRKpC2" target="_blank">529 E Valley Blvd #128, San Gabriel, CA 91776</a></h6>
     <p>This is my close friend's favorite place and I think it's great too.
     </p>
-  </section>
-  <section id="yong">
+  </div>
+  <div id="yong">
     <h3><a href="https://www.yelp.com/biz/young-dong-tofu-house-san-gabriel-2" target="_blank">G2. Young Dong Tofu House</a></h3>
     <h6><a href="https://goo.gl/maps/5ymcizg7Z2D2" target="_blank">927 E Las Tunas Dr, San Gabriel, CA 91776</a></h6>
     <p>I have been eating at this restaurant since I was a kid and it has rarely disappointed me.
       <br/> Beef sundubu with la galbi. 
       </p>
-  </section>
-  <section id="beverly">
+  </div>
+  <div id="beverly">
     <h3><a href="https://www.yelp.com/biz/beverly-soon-tofu-restaurant-los-angeles" target="_blank">G3. CLOSED Beverly Soon Tofu Restaurant</a></h3>
     <h6><a href="https://goo.gl/maps/pWa4w9Fp3gp" target="_blank">2717 W Olympic Blvd, Los Angeles, CA 90006</a></h6>
     <p>A victim of covid, the shop closed in September 2020 and I made the drive from SF the day after I heard the news from an eater article. My sister called 103 times so we could do a phone order before I got there. They didn't pick up and I was welcomed to LA after a 5 hour drive to a line of 20 people who had already placed orders online in the afternoon. I sucked it up and placed an order for the next day and picked it up on the way back to SF and ate it for dinner that night with my sister and parents I had also picked up the day before because the air quality in SGV was so bad because of a fire a couple miles from my parents.
@@ -150,13 +198,13 @@
         <img id="foodpic" src="https://lh3.googleusercontent.com/pw/AL9nZEVWER9-2BPfBZlc7P-iRDB08Oy5Dqu-FsqrDQcevyoX2l50DxzI97wHFrFG759K_tZJ29flRShL21Ze5WdoaygfyblPprdWjIdZirOYGhUufinc4mqKXXadxVLs1WZj3oh5W8KEcnuE2mqudinjmofTdQ=s1940-no?authuser=0"  alt="Beverly soon tofu exterior pictures" />
         <figcaption>Somber fans of Beverly Soon getting togo one last time before they closed.</figcaption>
     </figure>
-  </section>
-  <section id="phofish">
+  </div>
+  <div>
     <h2>viet pho and crawfish</h2>
     <p>There's a huge Vietnamese population in LA and two of my favorite vietnamese foods are pho and crawfish.
     </p>
-  </section>
-  <section id="filet">
+  </div>
+  <div id="filet">
     <h3><a href="https://www.yelp.com/biz/pho-filet-south-el-monte" target="_blank">H1. Pho Filet</a></h3>
     <h6><a href="https://goo.gl/maps/eGwzpnD97u32" target="_blank">9463 Garvey Ave ste a, South El Monte, CA 91733</a></h6>
     <p>My goto pho place</p>
@@ -164,30 +212,30 @@
       <img id="foodpic" src="https://lh3.googleusercontent.com/pw/AL9nZEXI9Rdr5075IoxiD3rgozsBIqroUyx3EP-czDNopd3Uxe121W7xmTwYNZxiMZKtTs32jBhPQRqK9n5dWt-xajSHT9gKLdDodSe5c4kf6ZJYROH7hqsdZjBO_xvLaLPLgLTJDWf50EEurMqddFjLRbpXkA=w1093-h1940-no?authuser=0"  alt="pho filet food picture" />
       <figcaption>A blurry pic for the food Journal</picture></figcaption>
     </figure>
-  </section>
-  <section id="crawfish">
+  </div>
+  <div id="crawfish">
     <h3><a href="https://www.yelp.com/biz/the-boiling-crab-alhambra-2" target="_blank">H2. The Boiling Crab</a></h3>
     <h6><a href="https://goo.gl/maps/LhATJDTiWLzWiaQ67" target="_blank">230 N Garfield Ave, Monterey Park, CA 91754</a></h6>
     <p>Although boils are traditionally southern, the idea of adding the boiled seafood to a bag with tons of butter and seasoning was an idea by the Vietnamese population in the south. This “southern vietnamese” tradition was carried onto vietnamese populations across the US and Boiling Crab is one of the first to bring it to LA. Boiling crab and other viet cajun shops make shrimp and crawfish taste oh so good.
     </p>
-  </section>
-  <section id="golden">
+  </div>
+  <div id="golden">
     <h3><a href="https://www.yelp.com/biz/golden-deli-san-gabriel" target="_blank">H3. Golden Deli</a></h3>
     <h6><a href="https://goo.gl/maps/LvyzFesxtkQ2" target="_blank">815 W Las Tunas Dr, San Gabriel, CA 91776</a></h6>
     <p>So this is the famous golden deli. My order differs from the standard pho because I like to tack on an order of durian smoothie to my order. 
     </p>
-  </section>
-  <section id="lao">
+  </div>
+  <div id="lao">
     <h3><a href="https://www.yelp.com/biz/laoxi-noodle-house-arcadia" target="_blank">H4. LaoXi Noodle House</a></h3>
     <h6><a href="https://goo.gl/maps/9KYpv4ezCR92" target="_blank">600 Live Oak Ave, Arcadia, CA 91006</a></h6>
     <p>Ok so this isn't vietnamese at all but i've been talking about noodles and i just wanted to mention this gem in arcadia. They serve northern chinese noodles and my favorite is the wifes special with tomato egg.
     </p>
-  </section>
-  <section id="hype">
+  </div>
+  <div>
     <h2>very hyped restaurants</h2>
     <p>These places have tons of reviews and are mainstream but heck I still like them and the hype is real</p>
-  </section>
-  <section id="tsujita">
+  </div>
+  <div id="tsujita">
     <h3><a href="https://www.yelp.com/biz/tsujita-la-artisan-noodle-los-angeles-2" target="_blank">I. Tsujita LA Artisan Noodle</a></h3>
     <h6><a href="https://goo.gl/maps/KiWeCKrwav52" target="_blank">2050 Sawtelle Blvd, Los Angeles, CA 90025</a></h6>
     <p>Alright so you know ramen, but have you heard of tsukemen? This place is an og of tsukemen, it's characterized with a thicker wavy noodle that the almost gelatinous extremely warm pork broth readily adheres to. I like to add garlic to help cut the fat of the soup. Don't forget to ask for soup to be added to your leftover broth to dilute it and warm it up to be drunk after you finish your meal. It's typically dashi and the way you ask in japanese is スープ割り or  “Soup Wari(split)”.
@@ -199,8 +247,8 @@
         <figcaption>A blurry picture of the spicier, garlicier, likelier to be held in the danger zone annex.</figcaption>
     </figure>
       
-  </section>
-  <section id="bavel">
+  </div>
+  <div id="bavel">
     <h3><a href="https://www.yelp.com/biz/bavel-los-angeles-3" target="_blank">J. Bavel</a></h3>
     <h6><a href="https://goo.gl/maps/sgSkjKotfYD2" target="_blank">500 Mateo St, Los Angeles, CA 90013</a></h6>
     <p>from the creators of Bestia, Came Bavel which seems just as established in their own right. I haven't been since 2018 when they opened but I still vaguely remember the meal so they must be doing something right. 
@@ -212,18 +260,18 @@
   
     
   </p>
-  </section>
-  <section id="din">
+  </div>
+  <div id="din">
     <h3><a href="https://www.yelp.com/biz/din-tai-fung-arcadia-5" target="_blank">K. CLOSED Din Tai Fung</a></h3>
     <h6><a href="https://goo.gl/maps/kLx2PpF91ix" target="_blank">1108 S Baldwin Ave, Arcadia, CA 91007</a></h6>
     <p>Din Tai Fung, one of the first American outposts of this taiwanese hit serving xiao long bao(little steamer basket buns). From the wiki: In 1996, the first international (DTF) location opened in Tokyo, and the first North American store opened in Arcadia, California in 2000. It would be a regular staple of my childhood and disappointed me when they close the original Arcadia location in June 2020 because of covid.
     </p>
-  </section>
-  <section id="ayce">
+  </div>
+  <div>
     <h2>AYCE ALL YOU CAN EAT</h2>
     <p>LA just does AYCE better. It has the real estate and lower cost of living to create a well run AYCE establishment that sf and nyc can't get the hang of.</p>
-  </section>
-  <section id="show">
+  </div>
+  <div id="show">
     <h3><a href="https://www.yelp.com/biz/show-sushi-san-dimas" target="_blank">L1. Show Sushi</a></h3>
     <h6><a href="https://goo.gl/maps/gGoAsUZsRxQ2" target="_blank">957 Arrow Hwy, San Dimas, CA 91773</a></h6>
     <p>The best quality all you can eat sushi at a quality price. Must order for me are the baked mussels and the must not order are the rolls. All nigiri and mussels baby.
@@ -232,19 +280,19 @@
       <img id="foodpic" src="https://lh3.googleusercontent.com/pw/AL9nZEVOTiyBJN2negIp15qAxqIe0Rz9FjfNF-bI6-4EIp7WNf5XCzWeDYXh4LkqHF4FYecD70zs63CbsPjPt1JTiv5ihs_0rToi68GwgWAJcDaAg3ORySHqTeaHr3VA3DGCFFaPH3Xgp-FPbr4Qoj0Lb-P4fw=w1457-h1940-no?authuser=0"  alt="show sushi food picture" />
       <figcaption>not pictured:The baked mussel</figcaption>
     </figure>
-  </section>
-  <section id="ook">
+  </div>
+  <div id="ook">
     <h3><a href="https://www.yelp.com/biz/oo-kook-korean-bbq-san-gabriel" target="_blank">L2. OO-KOOK Korean BBQ</a></h3>
     <h6><a href="https://goo.gl/maps/Z1osgpMUSFo" target="_blank">5405 Rosemead Blvd, San Gabriel, CA 91776</a></h6>
     <p>solid kbbq but I haven't been here in a long time. maybe 2019. Good quality meats at a slightly higher price and nice salad bar situation, ayce fruit as a dessert hits different.</p>
-  </section>
-  <section id="yerim">
+  </div>
+  <div id="yerim">
     <h3><a href="https://www.yelp.com/biz/yerim-korean-bbq-los-angeles-2" target="_blank">L3. Yerim Korean BBQ</a></h3>
     <h6><a href="https://goo.gl/maps/D5tLoWkAL1T2" target="_blank">300 S Hobart Blvd, Los Angeles, CA 90020</a></h6>
     <p>Cheap and good.
     </p>
-  </section>
-  <section id="hjc">
+  </div>
+  <div id="hjc">
     <h3><a href="https://www.yelp.com/biz/hae-jang-chon-korean-bbq-restaurant-los-angeles" target="_blank">L4. Hae Jang Chon</a></h3>
     <h6><a href="https://goo.gl/maps/cGnM31fEkKP2" target="_blank">3821 W 6th St, Los Angeles, CA 90020</a></h6>
     <p>Long waits and a cast iron pan style instead of grill grates.
@@ -253,29 +301,29 @@
       <img id="foodpic" src="20170531_130408-COLLAGE"  alt="HJC grease collection picture" />
       <figcaption>Look at that fat accumulation rendered out of the meat from 2 guys. Yum.</figcaption>
     </figure>
-  </section>
-  <section id="shin">
+  </div>
+  <div id="shin">
     <h3><a href="https://www.yelp.com/biz/shin-sen-gumi-yakitori-and-shabu-shabu-monterey-park-monterey-park" target="_blank">L5. CLOSED Shin-Sen-Gumi Yakitori & Shabu-Shabu</a></h3>
     <h6><a href="https://goo.gl/maps/8CQgj1Za6KU2" target="_blank">111 N Atlantic Blvd #248, Monterey Park, CA 91754</a></h6>
     <p>This place used to do a sick ayce weekday yakitori deal. One guy would just be at that long charcoal grill churning out yakitori and piling it all up on a plate in front of him and people would just get up and take as many sticks as they wanted.</p>
-  </section>
-  <section id="mokkoji">
+  </div>
+  <div id="mokkoji">
     <h3><a href="https://www.yelp.com/biz/mokkoji-arcadia-2" target="_blank">L6. Mokkoji</a></h3>
     <h6><a href="https://goo.gl/maps/y7CgHrFDeQE2" target="_blank">815 W Naomi Ave, Arcadia, CA 91007</a></h6>
     <p>This location closed but the chain lives on all around the LA area and continues to serve ayce veggies along with your meat order and the best Goma(sesame) dipping sauce of all time imo. They used to make porridge with the leftover stock but the other locations I've been to don't do that but I just take the leftover broth home and DIY.
     </p>
-  </section>
-  <section id="mongolian">
+  </div>
+  <div id="mongolian">
     <h3><a href="https://www.yelp.com/biz/golden-palace-mongolian-bbq-pasadena" target="_blank">L7. Golden Palace Mongolian BBQ</a></h3>
     <h6><a href="https://goo.gl/maps/6qaVSPNxK182" target="_blank">3681 E Colorado Blvd, Pasadena, CA 91107</a></h6>
     <p>Add as much or as little noodles as you want. Go as many times as you want. Add some tasty broccoli and make your own sauce combos. They also have a fun weigh your leftovers and pay for them togo system. The only qualm I have with AYCE mongolian bbq is the meat quality isn't as good as kbbq and it's a little overcooked to my liking and my stomach often does not agree with me the next day.
     </p>
-  </section>
-  <section id="dessert">
-    <h2>essert</h2>
+  </div>
+  <div>
+    <h2>dessert</h2>
     <p>All these desserts are not overpoweringly sweet. Pass the asian mom test.</p>
-  </section>
-  <section id="donut">
+  </div>
+  <div id="donut">
     <h3><a href="https://www.yelp.com/biz/the-donut-man-glendora" target="_blank">M. The Donut Man</a></h3>
     <h6><a href="https://goo.gl/maps/zuiqmyao9my" target="_blank">915 E Rte 66, Glendora, CA 91740</a></h6>
     <p>There's something alluring about their strawberry donuts and how beautiful and tasty they are. And then there's the story of the founder being a japanese man originally coming to america in 1972 with his wife to open and run a chain shop of foster donuts and eventually making it his own independent shop and inventing the strawberry donut recipe when there was an overabundance of strawberry from the farms that once surrounded the area. Oh and it's open 24 hours.
@@ -284,13 +332,13 @@
       <img id="foodpic" src="https://lh3.googleusercontent.com/pw/AL9nZEW9EmcyMPk5D1AZMY43zg9pXJBVGkLHkk3RhcZasGgd0MbzQh7nHOg0_gYCnQcQodQrRAbNoeIUDG8APbTL7Tlo9AmMiFKouMpCLKqgTajgYxFXral0nY0pHER0qN-oeEkwKU7LcfsvHl_hFr1hVAGCHw=s1940-no?authuser=0"  alt="donut man food and exterior picture" />
       <figcaption>Make sure to check their strawberry dontus are in season!</figcaption>
     </figure>
-  </section>
-  <section id="candy">
+  </div>
+  <div id="candy">
     <h3><a href="https://www.yelp.com/biz/california-snack-foods-south-el-monte" target="_blank">N. California Snack Foods</a></h3>
     <h6><a href="https://goo.gl/maps/Jth3ZUCUBMN2" target="_blank">2131 Tyler Ave, South El Monte, CA 91733</a></h6>
     <p>Candy apples. Usually thought of as a tooth breaker with some coating of unappetizing chunks of nuts. Well these are unlike those at all. The California Snack Foods company has tons of candies ranging from the cotton type to frozen pop type. But the star of the show are these apples that are coated in this red candy like caramel. sold in boxes of 24 their rendition of the candy apple called the karm'l dapple. And it's not covered in some weird nuts but deez nuts have been replaced by delicious nougat bits. Get 'Em.</p>
-  </section>
-  <section id="angel">
+  </div>
+  <div id="angel">
     <h3><a href="https://www.yelp.com/biz/angel-maid-bakery-los-angeles" target="_blank">O. Angel Maid Bakery</a></h3>
     <h6><a href="https://goo.gl/maps/HKYw4kZonZC1VevK9" target="_blank">4542 S Centinela Ave, Los Angeles, CA 90066</a></h6>
     <p>I had some strawberry shortcake from Harbs in New York which got its start originally in Japan in 1976. I came back to LA during the summer and I had to find a comparable Japanese strawberry shortcake and happened across Angel Maid. Good reviews and a history just as rich, founded by Japanese immigrants in 1972. The first time I visited in November 2018, it was close to closing and they had no cakes left and it was another 9 months until August 2019 when I reserved a cake for pickup and was blown away by the quality. I found my replacement. In the 3 years since, I've racked up SIXTEEEEN visits.
@@ -299,36 +347,30 @@
       <img id="foodpic" src=https://lh3.googleusercontent.com/pw/AL9nZEVIhx9eC2WGa0Uxa-yYEBC5Lj-_hosNF3SjXG-dOFVNDQJ37rJci88ENHags_JNbfa8j_KeoBaB7sB59GG00fznzJ26N7ARmmZROlJTJl3md4JRoVSXiSv_0_fKZ_nLzhKRAqvMdmb2ISq16_yVhnsdLg=w2046-h1535-no?authuser=0"  alt="angel maid cake display case" />
       <figcaption>Come early so the display clase isn't empty for first come first serve items!</figcaption>
     </figure>
-  </section>
-  <section id="21">
+  </div>
+  <div id="21">
     <h3><a href="https://www.yelp.com/biz/21-choices-frozen-yogurt-pasadena" target="_blank">P. 21 Choices Frozen Yogurt</a></h3>
     <h6><a href="https://goo.gl/maps/3mFER8STNYH2" target="_blank">85 W Colorado Blvd, Pasadena, CA 91105</a></h6>
     <p>The best sampling experience I've ever had where I came in on a quiet weekday and wanted samples and couldn't decide on one and asked if it would be possible to do all the flavors and the person running the store got a normal cup and did one pull of each flavor and turned the cup so the whole inner circumference was lined with vertical lines of 8 different flavors. It was awesome but I settled on plain tart because plain tart is awesome. If they had the circus animal cookie flavor I would have gotten it because it's a childhood classic.
       <br/>Parking: <a href="https://goo.gl/maps/kVGn5ZuMMdt">This structure is free during the day for the first 90 minutes</a>
     </p>
-  </section>
-  <section id="salt">
+  </div>
+  <div id="salt">
     <h3><a href="https://www.yelp.com/biz/salt-and-straw-los-angeles" target="_blank">Q. Salt & Straw</a></h3>
     <h6><a href="https://goo.gl/maps/kf5gyXqB9PP2" target="_blank">240 N Larchmont Blvd, Los Angeles, CA 90004</a></h6>
     <p>salt and straw has gotten a lot more mainstream since 2018.
       <br/>Recommendations: Go in March for cereal month and try their lucky charms and rice krispy treat flavors
     </p>
-  </section>
-  <section id="jenis">
+  </div>
+  <div id="jenis">
     <h3><a href="https://www.yelp.com/biz/jenis-splendid-ice-creams-los-angeles-3" target="_blank">R. Jeni's Splendid Ice Creams</a></h3>
     <h6><a href="https://goo.gl/maps/VNsZ3MdhmTp" target="_blank">123 N Larchmont Blvd, Los Angeles, CA 90004</a></h6>
     <p>Brown Butter almond brittle. Nuff said.</p>
-  </section>
-  <section id="fresa">
+  </div>
+  <div id="fresa">
     <h3><a href="https://www.yelp.com/biz/el-antojito-gardena" target="_blank">S. Taco's & Mariscos El Antojito </a></h3>
     <h6><a href="https://goo.gl/maps/t61yfDnt8RAiEKZ96" target="_blank">16717 S Figueroa St, Gardena, CA 90248</a></h6>
     <p>Get the Fresa Con Crema and fresh corn cut off the cob Esquites(none of that canned shizz). Its at the truck opposite of the taco truck with all the desserts</p>
-  </section>
+  </div>
 </body>
-<footer>
-  <!-- Footer content -->
-</footer>
-
-<script src="script.js"></script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQdrIxHR_gYB261kkm5GfkKFE9qTGygTQ&callback=initMap"></script>
 </html>
